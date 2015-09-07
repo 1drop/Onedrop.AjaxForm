@@ -1,0 +1,15 @@
+prototype(Onedrop.AjaxForm:Form) < prototype(TYPO3.Neos.NodeTypes:Form) {
+	templatePath = 'resource://Onedrop.AjaxForm/Private/Templates/NodeTypes/AjaxForm.html'
+}
+
+prototype(TYPO3.Neos:Page) {
+	body.javascripts.ajaxForms = TYPO3.TypoScript:Tag {
+		@position = '5100'
+		tagName = 'script'
+		attributes {
+			src = TYPO3.TypoScript:ResourceUri {
+				path = 'resource://Onedrop.AjaxForm/Public/JavaScript/AjaxForm.js'
+			}
+		}
+	}
+}

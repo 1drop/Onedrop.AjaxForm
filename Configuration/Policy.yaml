@@ -1,0 +1,14 @@
+#                                                                        #
+# Security policy for the Onedrop.Ajaxform package                       #
+#                                                                        #
+
+privilegeTargets:
+  TYPO3\Flow\Security\Authorization\Privilege\Method\MethodPrivilege:
+    Onedrop_AjaxForm_ControllerAction:
+      matcher: method(Onedrop\AjaxForm\Controller\AjaxFormController->indexAction())
+roles:
+  'TYPO3.Flow:Everybody':
+    privileges:
+      -
+        privilegeTarget: Onedrop_AjaxForm_ControllerAction
+        permission: GRANT

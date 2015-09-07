@@ -1,0 +1,9 @@
+TYPO3:
+  Neos:
+    userInterface:
+      translation:
+        autoInclude:
+          'Onedrop.AjaxForm': ['NodeTypes/*']
+    typoScript:
+      autoInclude:
+        'Onedrop.AjaxForm': TRUE

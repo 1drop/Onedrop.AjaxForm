@@ -1,0 +1,12 @@
+{namespace form=TYPO3\Form\ViewHelpers}
+
+<div class="ajax-content">
+	<f:if condition="{formIdentifier}">
+		<f:then>
+			<form:render persistenceIdentifier="{formIdentifier}" presetName="{presetName}"/>
+		</f:then>
+		<f:else>
+			<p>No Form identifier has been given.</p>
+		</f:else>
+	</f:if>
+</div>
