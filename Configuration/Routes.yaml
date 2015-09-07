@@ -1,0 +1,9 @@
+-
+  name: 'Onedrop - Ajax Form'
+  uriPattern: 'form/{formIdentifier}/{presetName}'
+  defaults:
+    '@package': 'Onedrop.AjaxForm'
+    '@controller': 'AjaxForm'
+    '@action': 'index'
+    '@format': 'html'
+  httpMethods: ['GET','POST']
