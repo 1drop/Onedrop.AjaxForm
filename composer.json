@@ -2,6 +2,7 @@
     "name": "onedrop/ajaxform",
     "type": "typo3-flow-package",
     "description": "Neos package that provides an additional Form prototype, Routes and JS to have Ajax forms",
+    "license": ["MIT"],
     "require": {
         "typo3/neos": ">=2.0"
     },
