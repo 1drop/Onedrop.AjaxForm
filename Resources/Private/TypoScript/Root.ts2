@@ -8,7 +8,7 @@ prototype(TYPO3.Neos:Page) {
 		tagName = 'script'
 		attributes {
 			src = TYPO3.TypoScript:ResourceUri {
-				path = 'resource://Onedrop.AjaxForm/Public/JavaScript/AjaxForm.js'
+				path = 'resource://Onedrop.AjaxForm/Public/JavaScript/ajaxForm.js'
 			}
 		}
 	}
