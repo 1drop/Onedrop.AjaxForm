@@ -1,6 +1,6 @@
 -
   name: 'Onedrop - Ajax Form'
-  uriPattern: 'form/{formIdentifier}/{presetName}'
+  uriPattern: 'form/{formIdentifier}/{presetName}(/{locale})'
   defaults:
     '@package': 'Onedrop.AjaxForm'
     '@controller': 'AjaxForm'

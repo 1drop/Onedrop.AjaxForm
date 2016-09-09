@@ -6,8 +6,9 @@
 	$.each($('div[data-ajax="ajax-loaded-form"]'), function (idx, ajaxForm) {
 		var formIdentifier = $(ajaxForm).attr('data-identifier');
 		var presetName = $(ajaxForm).attr('data-presetName');
+		var locale = $(ajaxForm).attr('data-locale');
 		// This route must be configured in the /Configuration/Routes.yaml of the project
-		var formAjaxUrl = '/form/' + formIdentifier + '/' + presetName;
+		var formAjaxUrl = '/form/' + formIdentifier + '/' + presetName + '/' + locale;
 		// Delegate the submit form event to the persistent ajax container
 		$(ajaxForm).on('submit', 'form', function (e) {
 			var formObj = $(this);
