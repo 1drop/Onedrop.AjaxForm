@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "module": "none",
+        "noImplicitAny": true,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "sourceMap": false,
+        "outDir": "../Public/JavaScript",
+        "target": "es5"
+    },
+    "files": [
+        "TypeScript/form"
+    ],
+    "compileOnSave": true
+}

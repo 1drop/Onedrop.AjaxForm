@@ -3,6 +3,9 @@
 This package provides an additional form element which can be used as a replacement 
 of ``TYPO3.Neos.NodeTypes:Form`` to serve every form asynchronously via javascript.
 
+It's built according to the principle of progressive enhancement and will fallback to 
+the default behavior of the `Form` element.
+
 This is especially useful if you serve your form inside a modal dialog or an accordion
 and the regular form causes a page reload which makes the confirmation message invisible
 to your user.
@@ -10,9 +13,7 @@ to your user.
 This package adds additional javascript to the end of the body of every page which provides
 the functionality. 
 
-**This javascript requires jQuery to be included in your page template.**  
-As it uses a pretty high position, this should work out-of-the-box if you included jQuery
-in your header or footer-scripts.
+**This javascript does not require jQuery, it's plain vanilla.**  
 
 ## How-To:
 
@@ -46,14 +47,11 @@ should then look like this:
     ##
     # TYPO3 Neos subroutes
     -
-      name: 'Onedrop - Ajax Form'
-      uriPattern: 'form/{formIdentifier}/{presetName}'
-      defaults:
-        '@package': 'Onedrop.AjaxForm'
-        '@controller': 'AjaxForm'
-        '@action': 'index'
-        '@format': 'html'
-      httpMethods: ['GET','POST']
+      name: 'Onedrop - AjaxForm'
+      uriPattern: '<OnedropAjaxFormSubRoutes>'
+      subRoutes:
+        'OnedropAjaxFormSubRoutes':
+          package: 'Onedrop.AjaxForm'
     -
       name: 'TYPO3 Neos'
       uriPattern: '<TYPO3NeosSubroutes>'
@@ -65,9 +63,9 @@ should then look like this:
 
 ## Usage: 
 
-### TypoScript:
+### Fusion:
 
-You can use the ``Onedrop.AjaxForm:Form`` TS object as a replacement for the regular ``TYPO3.Neos.NodeTypes:Form``
+You can use the ``Onedrop.AjaxForm:Form`` Fusion object as a replacement for the regular ``TYPO3.Neos.NodeTypes:Form``
 element e.g.
 
     page = Page {  
@@ -86,10 +84,10 @@ of the selected content element to 'Ajax Form'.
 
 ## JavaScript:
 
-The form submission is handled via a jQuery based javascript.  
+The form submission is handled via vanilla javascript.  
 This package automatically appends the necessary script to the end of the body of every ``TYPO3.Neos:Page``.
 
-If you use Grunt, Gulp or any other minification system, you probably don't want this extra script, 
+If you use Grunt, Gulp or any other build system, you probably don't want this extra script, 
 but include it in your build process, than you can remove this inclusion by adding this to your sites ``Root.ts2``:
 
     prototype(TYPO3.Neos:Page) {
@@ -102,7 +100,7 @@ As the content of your form is being replaced by the confirmation message you us
 the form to reset after the user has seen the confirmation (so that the form can be submitted a second time).
 
 If you place an attribute ``data-reset-form="1"`` inside the confirmation message, the form is 
-being resetted after 3 seconds.
+being resetted after 5 seconds.
 
 E.g. ``myform.yaml``
 

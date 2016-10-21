@@ -1,13 +1,20 @@
-{namespace form=TYPO3\Form\ViewHelpers}
-<div{attributes -> f:format.raw()}>
-	<f:if condition="{formIdentifier}">
-		<f:then>
-			<div data-ajax="ajax-loaded-form" data-identifier="{formIdentifier}" data-presetName="{presetName}">
-				<p>Loading form please wait</p>
-			</div>
-		</f:then>
-		<f:else>
-			<p>Please select a valid Form identifier in the inspector</p>
-		</f:else>
-	</f:if>
-</div>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"
+      xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+      xmlns:form="http://typo3.org/ns/TYPO3/Form/ViewHelpers">
+<f:section name="Content">
+    <div{attributes -> f:format.raw()}>
+        <f:if condition="{formIdentifier}">
+            <f:then>
+                <div data-ajax="ajax-form" data-identifier="{formIdentifier}" data-presetName="{presetName}" data-locale="{locale}">
+                    <form:render persistenceIdentifier="{formIdentifier}" presetName="{presetName}" overrideConfiguration="{overrideConfiguration}" />
+                </div>
+            </f:then>
+            <f:else>
+                <p>Please select a valid Form identifier in the inspector</p>
+            </f:else>
+        </f:if>
+    </div>
+</f:section>
+
+</html>

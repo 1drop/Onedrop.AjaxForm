@@ -1,12 +1,19 @@
-{namespace form=TYPO3\Form\ViewHelpers}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"
+      xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+      xmlns:form="http://typo3.org/ns/TYPO3/Form/ViewHelpers">
 
-<div class="ajax-content">
+<f:layout name="Default" />
+
+<f:section name="Content">
 	<f:if condition="{formIdentifier}">
-		<f:then>
-			<form:render persistenceIdentifier="{formIdentifier}" presetName="{presetName}"/>
-		</f:then>
-		<f:else>
-			<p>No Form identifier has been given.</p>
-		</f:else>
-	</f:if>
-</div>
+        <f:then>
+            <form:render persistenceIdentifier="{formIdentifier}" presetName="{presetName}"/>
+        </f:then>
+        <f:else>
+            <p>{f:translate(id: 'content.noValidFormIdentifier', package: 'TYPO3.Neos.NodeTypes', source: 'NodeTypes/Form')}</p>
+        </f:else>
+    </f:if>
+</f:section>
+
+</html>
