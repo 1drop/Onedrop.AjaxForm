@@ -1,7 +1,7 @@
 # Onedrop.AjaxForm
 
 This package provides an additional form element which can be used as a replacement 
-of ``TYPO3.Neos.NodeTypes:Form`` to serve every form asynchronously via javascript.
+of ``Neos.NodeTypes:Form`` to serve every form asynchronously via javascript.
 
 It's built according to the principle of progressive enhancement and will fallback to 
 the default behavior of the `Form` element.
@@ -31,48 +31,14 @@ Use the command ``composer require onedrop/ajaxform`` to add this package as a r
 
 ### Routes.yaml:
 
-This package provides an additional Flow Route to serve only the html part of the forms,
-so they can be loaded via Ajax and replace the HTML placeholder content on the page, which
-is served from the TS object.
-
-To make this work, you need to copy the content of the file ``Routes.yaml`` from this package
-into the Routes.yaml of your Neos project.  
-
-Your ``Routes.yaml`` inside your project-root directory ``myproject/Configuration/Routes.yaml``
-should then look like this:
-
-
-    #                                                                        #
-    # Routes configuration                                                   #
-    #                                                                        #
-    # This file contains the configuration for the MVC router.               #
-    # Just add your own modifications as necessary.                          #
-    #                                                                        #
-    # Please refer to the Flow manual for possible configuration options.    #
-    #                                                                        #
-    
-    ##
-    # TYPO3 Neos subroutes
-    -
-      name: 'Onedrop - AjaxForm'
-      uriPattern: '<OnedropAjaxFormSubRoutes>'
-      subRoutes:
-        'OnedropAjaxFormSubRoutes':
-          package: 'Onedrop.AjaxForm'
-    -
-      name: 'TYPO3 Neos'
-      uriPattern: '<TYPO3NeosSubroutes>'
-      subRoutes:
-        'TYPO3NeosSubroutes':
-          package: 'TYPO3.Neos'
-          variables:
-            'defaultUriSuffix': '.html'
+It's no longer necessary to modify any `Routes.yaml` as it's deprecated. The additional Ajax-routes are now included
+via `Settings.yaml`.
 
 ## Usage: 
 
 ### Fusion:
 
-You can use the ``Onedrop.AjaxForm:Form`` Fusion object as a replacement for the regular ``TYPO3.Neos.NodeTypes:Form``
+You can use the ``Onedrop.AjaxForm:Form`` Fusion object as a replacement for the regular ``Neos.NodeTypes:Form``
 element e.g.
 
     page = Page {  
@@ -92,12 +58,12 @@ of the selected content element to 'Ajax Form'.
 ## JavaScript:
 
 The form submission is handled via vanilla javascript.  
-This package automatically appends the necessary script to the end of the body of every ``TYPO3.Neos:Page``.
+This package automatically appends the necessary script to the end of the body of every ``Neos.Neos:Page``.
 
 If you use Grunt, Gulp or any other build system, you probably don't want this extra script, 
-but include it in your build process, than you can remove this inclusion by adding this to your sites ``Root.ts2``:
+but include it in your build process, than you can remove this inclusion by adding this to your sites ``Root.fusion``:
 
-    prototype(TYPO3.Neos:Page) {
+    prototype(Neos.Neos:Page) {
         body.javascripts.ajaxForms >
     }
 
@@ -113,7 +79,7 @@ E.g. ``myform.yaml``
 
     finishers:
       -
-        identifier: 'TYPO3.Form:Confirmation'
+        identifier: 'Neos.Form:Confirmation'
         options:
           message: |
                   <div class="callback-success" data-reset-form="1">

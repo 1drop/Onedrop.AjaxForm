@@ -1,15 +1,15 @@
-prototype(Onedrop.AjaxForm:Form) < prototype(TYPO3.Neos.NodeTypes:Form) {
+prototype(Onedrop.AjaxForm:Form) < prototype(Neos.NodeTypes:Form) {
     sectionName = 'Content'
     templatePath = 'resource://Onedrop.AjaxForm/Private/Templates/NodeTypes/AjaxForm.html'
     locale = ${node.context.dimensions.language[0]}
 }
 
-prototype(TYPO3.Neos:Page) {
-    body.javascripts.ajaxForms = TYPO3.TypoScript:Tag {
+prototype(Neos.Neos:Page) {
+    body.javascripts.ajaxForms = Neos.Fusion:Tag {
         @position = '5100'
         tagName = 'script'
         attributes {
-            src = TYPO3.TypoScript:ResourceUri {
+            src = Neos.Fusion:ResourceUri {
                 path = 'resource://Onedrop.AjaxForm/Public/JavaScript/form.js'
             }
         }

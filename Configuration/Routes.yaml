@@ -1,14 +1,4 @@
-##
-#  Add the following roule in your Configuration/Routes.yaml before the Neos routes
-##
-
-#-
-#  name: 'Onedrop - AjaxForm'
-#  uriPattern: '<OnedropAjaxFormSubRoutes>'
-#  subRoutes:
-#    'OnedropAjaxFormSubRoutes':
-#      package: 'Onedrop.AjaxForm'
-
+---
 -
   name: 'Ajax Form Endpoint'
   uriPattern: '__form/{formIdentifier}/{presetName}(/{locale})'

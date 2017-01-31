@@ -2,14 +2,14 @@
 namespace Onedrop\AjaxForm\Controller;
 
 /*                                                                        *
- * This script belongs to the TYPO3 Flow package "Onedrop.AjaxForm".      *
+ * This script belongs to the Neos Flow package "Onedrop.AjaxForm".       *
  *                                                                        *
  *                                                                        */
 
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Flow\I18n\Locale;
-use TYPO3\Flow\Mvc\Controller\ActionController;
-use TYPO3\Flow\Security\Context;
+use Neos\Flow\Annotations as Flow;
+use Neos\Flow\I18n\Locale;
+use Neos\Flow\Mvc\Controller\ActionController;
+use Neos\Flow\Security\Context;
 
 class AjaxFormController extends ActionController
 {
@@ -20,7 +20,7 @@ class AjaxFormController extends ActionController
     protected $securityContext;
     /**
      * @Flow\Inject
-     * @var \TYPO3\Flow\I18n\Service
+     * @var \Neos\Flow\I18n\Service
      */
     protected $i18nService;
 
