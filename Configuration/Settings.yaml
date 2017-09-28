@@ -12,3 +12,6 @@ Neos:
       routes:
         'Onedrop.AjaxForm':
           position: 'start'
+Onedrop:
+  AjaxForm:
+    includeJavascript: true

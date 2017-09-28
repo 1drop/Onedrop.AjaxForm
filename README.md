@@ -41,12 +41,14 @@ via `Settings.yaml`.
 You can use the ``Onedrop.AjaxForm:Form`` Fusion object as a replacement for the regular ``Neos.NodeTypes:Form``
 element e.g.
 
-    page = Page {  
-      body.parts.newsletterForm = Onedrop.AjaxForm:Form {  
-        formIdentifier = 'newsletter-form'  
-        presetName = 'bootstrap'  
-      }  
-    }
+```neosfusion
+page = Page {  
+  body.parts.newsletterForm = Onedrop.AjaxForm:Form {  
+    formIdentifier = 'newsletter-form'  
+    presetName = 'bootstrap'  
+  }  
+}
+```
 
 ### Content element:
 
@@ -58,14 +60,17 @@ of the selected content element to 'Ajax Form'.
 ## JavaScript:
 
 The form submission is handled via vanilla javascript.  
-This package automatically appends the necessary script to the end of the body of every ``Neos.Neos:Page``.
+This package automatically appends the necessary script to the end of the body of every ``Neos.Neos:Page`` where 
+a form is placed.
 
 If you use Grunt, Gulp or any other build system, you probably don't want this extra script, 
-but include it in your build process, than you can remove this inclusion by adding this to your sites ``Root.fusion``:
+but include it in your build process, than you can remove this inclusion by changing the setting ``Settings.yaml``:
 
-    prototype(Neos.Neos:Page) {
-        body.javascripts.ajaxForms >
-    }
+```yaml
+Onedrop:
+  AjaxForm:
+    includeJavascript: true
+```
 
 ### Form reload
 
@@ -86,3 +91,17 @@ E.g. ``myform.yaml``
                       <h4>Thank you for your request</h4>
                       We will contact you asap.
                   </div>
+
+### Use javascript out of context
+
+The JS is also shaped for general purpose, you can wrap any form in a div to configure the form
+to be served over ajax. You must have a controller URL that only serves the HTML for the form you
+want to ajaxify.
+
+```html
+<div data-ajax="ajax-form" data-ajax-uri="/some/ajax/endpoint">
+    <f:form action="doSomething" method="POST">
+        <!-- Form fields -->
+    </f:form>
+</div>
+```

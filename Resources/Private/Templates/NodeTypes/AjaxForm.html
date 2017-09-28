@@ -6,7 +6,7 @@
     <div{attributes -> f:format.raw()}>
         <f:if condition="{formIdentifier}">
             <f:then>
-                <div data-ajax="ajax-form" data-identifier="{formIdentifier}" data-presetName="{presetName}" data-locale="{locale}">
+                <div{formWrapperAttributes -> f:format.raw()}>
                     <form:render persistenceIdentifier="{formIdentifier}" presetName="{presetName}" overrideConfiguration="{overrideConfiguration}" />
                 </div>
             </f:then>

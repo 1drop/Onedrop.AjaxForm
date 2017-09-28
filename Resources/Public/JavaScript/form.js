@@ -2,17 +2,8 @@
 var AjaxForm = (function () {
     function AjaxForm(element) {
         this._delegator = element;
-        var formIdentifier = element.getAttribute('data-identifier');
-        if (!formIdentifier) {
-            throw new Error('Missing attribute data-identifier');
-        }
-        var presetName = element.getAttribute('data-presetName');
-        if (!presetName) {
-            throw new Error('Missing attribute data-presetName');
-        }
-        this._formUri = '/__form/' + formIdentifier + '/' + presetName;
-        if (element.hasAttribute('data-locale')) {
-            this._formUri += '/' + element.getAttribute('data-locale');
+        if (element.hasAttribute('data-ajax-uri')) {
+            this._formUri = element.getAttribute('data-ajax-uri');
         }
         this._form = element.querySelector('form');
         if (!this._form) {
