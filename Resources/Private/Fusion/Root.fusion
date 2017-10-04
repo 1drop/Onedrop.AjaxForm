@@ -2,7 +2,7 @@ prototype(Onedrop.AjaxForm:Form) < prototype(Neos.NodeTypes:Form) {
     sectionName = 'Content'
     templatePath = 'resource://Onedrop.AjaxForm/Private/Templates/NodeTypes/AjaxForm.html'
 
-    @context.formIdentifier = ${q(node).property('formIdentifier')}
+    @context.formIdentifier = ${this.formIdentifier}
     @context.locale = ${node.context.dimensions.language[0]}
     @context.presetName = ${this.presetName}
 

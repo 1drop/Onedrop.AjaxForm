@@ -8,4 +8,5 @@
     '@action': 'index'
     '@format': 'html'
     'locale': ''
+  toLowerCase: false
   httpMethods: ['GET','POST']
