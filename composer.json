@@ -4,8 +4,8 @@
     "description": "Neos package that provides an additional Form prototype, Routes and JS to have Ajax forms",
     "license": ["MIT"],
     "require": {
-        "neos/neos": "~3.0",
-        "neos/nodetypes": "~3.0"
+        "neos/neos": "~3.0 | ^4.0",
+        "neos/nodetypes": "~3.0 | ^4.0"
     },
     "autoload": {
         "psr-4": {
