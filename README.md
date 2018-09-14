@@ -19,7 +19,7 @@ the functionality.
 
 | Neos Version     | Onedrop.AjaxForm Version  |
 |------------------|---------------------------|
-| Neos 3.x         | 3.x                       |
+| Neos 3.x/4.x     | 3.x                       |
 | Neos 2.3 LTS     | 2.x                       |
 
 ## How-To:
