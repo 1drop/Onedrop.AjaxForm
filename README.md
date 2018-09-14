@@ -72,6 +72,14 @@ Onedrop:
     includeJavascript: true
 ```
 
+## JS Events
+
+You can use 2 events to register you event listens.
+
+Before Send Ajax Form `Onedrop.AjaxForm:before`
+
+After render Ajax Form to HTML `Onedrop.AjaxForm:after`
+
 ### Form reload
 
 As the content of your form is being replaced by the confirmation message you usually want 

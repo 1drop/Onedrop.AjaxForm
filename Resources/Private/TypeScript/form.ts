@@ -7,7 +7,12 @@ class AjaxForm {
     private _form: HTMLFormElement;
     private _request: XMLHttpRequest;
     private _submitter: HTMLInputElement;
+    private _customEventBefore: Event = new Event('Onedrop.AjaxForm:before');
+    private _customEventAfter: Event = new Event('Onedrop.AjaxForm:after');
 
+    /**
+     * @param {Element} element
+     */
     constructor(element: Element) {
         this._delegator = element;
         if (element.hasAttribute('data-ajax-uri')) {
@@ -22,7 +27,8 @@ class AjaxForm {
     }
 
     /**
-     *  Ajax helper to send only one simultaneous request
+     * Ajax helper to send only one simultaneous request
+     *
      * @param {FormData} formData
      * @param {Function} callback
      */
@@ -43,6 +49,7 @@ class AjaxForm {
     private handleResponse() {
         if (this._request.status >= 200 && this._request.status < 400) {
             this._delegator.innerHTML = this._request.response;
+            window.dispatchEvent(this._customEventAfter);
             this._form = <HTMLFormElement>this._delegator.querySelector('form');
             // another form step has been returned, so we keep handling the form
             if (this._form) {
@@ -63,6 +70,7 @@ class AjaxForm {
 
     /**
      * Capture the form submission and convert it to a ajax operation
+     *
      * @param {Event} e
      */
     private onFormSubmit(e: Event) {
@@ -72,6 +80,7 @@ class AjaxForm {
             formData.append(this._submitter.name, this._submitter.value);
             this._submitter = null;
         }
+        window.dispatchEvent(this._customEventBefore);
         this.ajax(formData, this.handleResponse.bind(this));
     }
 
@@ -95,7 +104,7 @@ class AjaxForm {
  * INITIALIZE ALL ELEMENTS
  */
 (function () {
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         let ajaxForms = document.querySelectorAll('[data-ajax="ajax-form"]');
         for (let i = 0; i < ajaxForms.length; i++) {
             new AjaxForm(ajaxForms.item(i));

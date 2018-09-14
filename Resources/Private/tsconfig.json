@@ -9,7 +9,7 @@
         "target": "es5"
     },
     "files": [
-        "TypeScript/form"
+        "./TypeScript/form.ts"
     ],
     "compileOnSave": true
 }

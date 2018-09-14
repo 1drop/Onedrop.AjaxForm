@@ -1,6 +1,8 @@
 'use strict';
 var AjaxForm = (function () {
     function AjaxForm(element) {
+        this._customEventBefore = new Event('Onedrop.AjaxForm:before');
+        this._customEventAfter = new Event('Onedrop.AjaxForm:after');
         this._delegator = element;
         if (element.hasAttribute('data-ajax-uri')) {
             this._formUri = element.getAttribute('data-ajax-uri');
@@ -27,6 +29,7 @@ var AjaxForm = (function () {
         var _this = this;
         if (this._request.status >= 200 && this._request.status < 400) {
             this._delegator.innerHTML = this._request.response;
+            window.dispatchEvent(this._customEventAfter);
             this._form = this._delegator.querySelector('form');
             if (this._form) {
                 this.bindFormSubmitListener();
@@ -50,6 +53,7 @@ var AjaxForm = (function () {
             formData.append(this._submitter.name, this._submitter.value);
             this._submitter = null;
         }
+        window.dispatchEvent(this._customEventBefore);
         this.ajax(formData, this.handleResponse.bind(this));
     };
     AjaxForm.prototype.bindFormSubmitListener = function () {
