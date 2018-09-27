@@ -1,8 +1,8 @@
 'use strict';
 var AjaxForm = (function () {
     function AjaxForm(element) {
-        this._customEventBefore = new Event('Onedrop.AjaxForm:before');
-        this._customEventAfter = new Event('Onedrop.AjaxForm:after');
+        this._customEventBefore = new CustomEvent('Onedrop.AjaxForm:before', { detail: element });
+        this._customEventAfter = new CustomEvent('Onedrop.AjaxForm:after', { detail: element });
         this._delegator = element;
         if (element.hasAttribute('data-ajax-uri')) {
             this._formUri = element.getAttribute('data-ajax-uri');

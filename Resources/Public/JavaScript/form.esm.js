@@ -13,8 +13,8 @@
  */
 export class AjaxForm {
     constructor(element) {
-        this._customEventBefore = new Event('Onedrop.AjaxForm:before');
-        this._customEventAfter = new Event('Onedrop.AjaxForm:after');
+        this._customEventBefore = new CustomEvent('Onedrop.AjaxForm:before', {detail: element});
+        this._customEventAfter = new CustomEvent('Onedrop.AjaxForm:after', {detail: element});
         this._delegator = element;
         if (element.hasAttribute('data-ajax-uri')) {
             this._formUri = element.getAttribute('data-ajax-uri');
@@ -22,11 +22,11 @@ export class AjaxForm {
         this._form = element.querySelector('form');
         if (!this._form) {
             throw new Error('No form element found in ajax container');
-        }
-        else {
+        } else {
             this.bindFormSubmitListener();
         }
     }
+
     ajax(formData, callback) {
         if (this._request) {
             this._request.abort();
@@ -37,6 +37,7 @@ export class AjaxForm {
         this._request.onreadystatechange = callback;
         this._request.send(formData);
     }
+
     handleResponse() {
         if (this._request.status >= 200 && this._request.status < 400) {
             this._delegator.innerHTML = this._request.response;
@@ -44,19 +45,18 @@ export class AjaxForm {
             this._form = this._delegator.querySelector('form');
             if (this._form) {
                 this.bindFormSubmitListener();
-            }
-            else {
+            } else {
                 if (this._request.response.indexOf('data-reset-form') > -1) {
                     window.setTimeout(() => {
                         this.ajax(null, this.handleResponse.bind(this));
                     }, 5000);
                 }
             }
-        }
-        else {
+        } else {
             console.error('Something went wrong with the ajax form request');
         }
     }
+
     onFormSubmit(e) {
         e.preventDefault();
         let formData = new FormData(this._form);
@@ -67,6 +67,7 @@ export class AjaxForm {
         window.dispatchEvent(this._customEventBefore);
         this.ajax(formData, this.handleResponse.bind(this));
     }
+
     bindFormSubmitListener() {
         this._form.addEventListener('submit', (e) => this.onFormSubmit(e));
         let submittingElements = this._form.querySelectorAll('button[type="submit"],input[type="submit"]');
