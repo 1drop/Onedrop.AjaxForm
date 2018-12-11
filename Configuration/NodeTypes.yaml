@@ -1,6 +1,6 @@
 'Onedrop.AjaxForm:Form':
   superTypes:
-    'Neos.NodeTypes:Form': TRUE
+    'Neos.NodeTypes.Form:Form': TRUE
   ui:
     label: i18n
     icon: 'icon-envelope-alt'
