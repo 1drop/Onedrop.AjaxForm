@@ -1,4 +1,4 @@
-prototype(Onedrop.AjaxForm:Form) < prototype(Neos.NodeTypes:Form) {
+prototype(Onedrop.AjaxForm:Form) < prototype(Neos.NodeTypes.Form:Form) {
     sectionName = 'Content'
     templatePath = 'resource://Onedrop.AjaxForm/Private/Templates/NodeTypes/AjaxForm.html'
 
