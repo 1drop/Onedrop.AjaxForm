@@ -2,7 +2,9 @@
     "name": "onedrop/ajaxform",
     "type": "neos-package",
     "description": "Neos package that provides an additional Form prototype, Routes and JS to have Ajax forms",
-    "license": ["MIT"],
+    "license": [
+        "MIT"
+    ],
     "require": {
         "neos/neos": "~3.0 | ^4.0",
         "neos/nodetypes-form": "~3.0 | ^4.0"
@@ -11,5 +13,10 @@
         "psr-4": {
             "Onedrop\\AjaxForm\\": "Classes"
         }
+    },
+    "extra": {
+        "applied-flow-migrations": [
+            "TYPO3.FLOW3-201201261636"
+        ]
     }
 }
