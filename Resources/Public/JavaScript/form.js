@@ -10,8 +10,7 @@ var AjaxForm = (function () {
         this._form = element.querySelector('form');
         if (!this._form) {
             throw new Error('No form element found in ajax container');
-        }
-        else {
+        } else {
             this.bindFormSubmitListener();
         }
     }
@@ -33,16 +32,14 @@ var AjaxForm = (function () {
             this._form = this._delegator.querySelector('form');
             if (this._form) {
                 this.bindFormSubmitListener();
-            }
-            else {
+            } else {
                 if (this._request.response.indexOf('data-reset-form') > -1) {
                     window.setTimeout(function () {
                         _this.ajax(null, _this.handleResponse.bind(_this));
                     }, 5000);
                 }
             }
-        }
-        else {
+        } else {
             console.error('Something went wrong with the ajax form request');
         }
     };
@@ -69,7 +66,7 @@ var AjaxForm = (function () {
     return AjaxForm;
 }());
 (function () {
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener('DOMContentLoaded', function () {
         var ajaxForms = document.querySelectorAll('[data-ajax="ajax-form"]');
         for (var i = 0; i < ajaxForms.length; i++) {
             new AjaxForm(ajaxForms.item(i));
