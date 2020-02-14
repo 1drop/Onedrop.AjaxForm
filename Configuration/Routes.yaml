@@ -1,4 +1,3 @@
----
 -
   name: 'Ajax Form Endpoint'
   uriPattern: '__form/{formIdentifier}/{presetName}(/{locale})'

@@ -13,17 +13,16 @@ use Neos\Flow\Security\Context;
 
 class AjaxFormController extends ActionController
 {
-
     /**
      * @var Context
      */
     protected $securityContext;
+
     /**
      * @Flow\Inject
      * @var \Neos\Flow\I18n\Service
      */
     protected $i18nService;
-
 
     /**
      * Injects the Security Context
@@ -40,6 +39,7 @@ class AjaxFormController extends ActionController
      * @param string $formIdentifier
      * @param string $presetName
      * @param string $locale
+     * @throws \Neos\Flow\I18n\Exception\InvalidLocaleIdentifierException
      */
     public function indexAction($formIdentifier, $presetName, $locale = '')
     {
@@ -47,8 +47,10 @@ class AjaxFormController extends ActionController
             $currentLocale = new Locale($locale);
             $this->i18nService->getConfiguration()->setCurrentLocale($currentLocale);
         }
-        $this->view->assign('formIdentifier', $formIdentifier);
-        $this->view->assign('presetName', $presetName);
-    }
 
+        $this->view->assignMultiple([
+            'formIdentifier' => $formIdentifier,
+            'presetName' => $presetName,
+        ]);
+    }
 }
