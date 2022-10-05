@@ -2,16 +2,16 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
 	<file original="" product-name="Onedrop.AjaxForm" source-language="en" datatype="plaintext">
 		<body>
-			<trans-unit id="ui.label" xml:space="preserve">
+			<trans-unit id="ui.label">
 				<source>Ajax Form</source>
 			</trans-unit>
-			<trans-unit id="groups.form" xml:space="preserve">
+			<trans-unit id="groups.form">
 				<source>Form</source>
 			</trans-unit>
-			<trans-unit id="properties.formIdentifier" xml:space="preserve">
+			<trans-unit id="properties.formIdentifier">
 				<source>Form Identifier</source>
 			</trans-unit>
-			<trans-unit id="properties.formIdentifier.selectBoxEditor.placeholder" xml:space="preserve">
+			<trans-unit id="properties.formIdentifier.selectBoxEditor.placeholder">
 				<source>Select the Form identifier</source>
 			</trans-unit>
 		</body>

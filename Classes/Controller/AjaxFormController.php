@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Onedrop\AjaxForm\Controller;
 
 /*                                                                        *
@@ -7,41 +10,30 @@ namespace Onedrop\AjaxForm\Controller;
  *                                                                        */
 
 use Neos\Flow\Annotations as Flow;
+use Neos\Flow\I18n\Exception\InvalidLocaleIdentifierException;
 use Neos\Flow\I18n\Locale;
+use Neos\Flow\I18n\Service;
 use Neos\Flow\Mvc\Controller\ActionController;
 use Neos\Flow\Security\Context;
 
 class AjaxFormController extends ActionController
 {
     /**
+     * @Flow\Inject
      * @var Context
      */
-    protected $securityContext;
+    protected Context $securityContext;
 
     /**
      * @Flow\Inject
-     * @var \Neos\Flow\I18n\Service
+     * @var Service
      */
-    protected $i18nService;
+    protected Service $i18nService;
 
     /**
-     * Injects the Security Context
-     *
-     * @param Context $securityContext
-     * @return void
+     * @throws InvalidLocaleIdentifierException
      */
-    public function injectSecurityContext(Context $securityContext)
-    {
-        $this->securityContext = $securityContext;
-    }
-
-    /**
-     * @param string $formIdentifier
-     * @param string $presetName
-     * @param string $locale
-     * @throws \Neos\Flow\I18n\Exception\InvalidLocaleIdentifierException
-     */
-    public function indexAction($formIdentifier, $presetName, $locale = '')
+    public function indexAction(string $formIdentifier, string $presetName, string $locale = ''): void
     {
         if (!empty($locale)) {
             $currentLocale = new Locale($locale);

@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en"
       xmlns:f="http://typo3.org/ns/TYPO3Fluid/Fluid/ViewHelpers"
-      xmlns:form="http://typo3.org/ns/Neos/Form/ViewHelpers">
+      xmlns:form="http://typo3.org/ns/Neos/Form/ViewHelpers"
+      data-namespace-typo3-fluid="true"
+>
 
 <f:layout name="Default" />
 
@@ -11,7 +13,7 @@
             <form:render persistenceIdentifier="{formIdentifier}" presetName="{presetName}"/>
         </f:then>
         <f:else>
-            <p>{f:translate(id: 'content.noValidFormIdentifier', package: 'Neos.NodeTypes', source: 'NodeTypes/Form')}</p>
+            <p><f:translate id="content.noValidFormIdentifier" package="Neos.NodeTypes" source="NodeTypes/Form"/></p>
         </f:else>
     </f:if>
 </f:section>
