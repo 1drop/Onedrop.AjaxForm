@@ -1,0 +1,12 @@
+prototype(Neos.Neos:Page) {
+    body.javascripts.ajaxForms = Neos.Fusion:Tag {
+        @position = '5100'
+        tagName = 'script'
+        attributes {
+            src = Neos.Fusion:ResourceUri {
+                path = 'resource://Onedrop.AjaxForm/Public/JavaScript/form.js'
+            }
+        }
+        @if.hasFormAndIsLiveAndActive = ${q(node).children('[instanceof Neos.Neos:ContentCollection]').find('[instanceof Onedrop.AjaxForm:Form]').is() && node.context.live && Configuration.setting('Onedrop.AjaxForm.includeJavascript')}
+    }
+}

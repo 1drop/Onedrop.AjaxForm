@@ -1,36 +1,4 @@
-prototype(Onedrop.AjaxForm:Form) < prototype(Neos.NodeTypes.Form:Form) {
-    sectionName = 'Content'
-    templatePath = 'resource://Onedrop.AjaxForm/Private/Templates/NodeTypes/AjaxForm.html'
-
-    @context.formIdentifier = ${this.formIdentifier}
-    @context.locale = ${node.context.dimensions.language[0]}
-    @context.presetName = ${this.presetName}
-
-    formWrapperAttributes = Neos.Fusion:Attributes {
-        data-ajax = 'ajax-form'
-        data-ajax-uri = Neos.Fusion:UriBuilder {
-            package = 'Onedrop.AjaxForm'
-            controller = 'AjaxForm'
-            action = 'index'
-            format = 'html'
-            arguments {
-                locale = ${locale}
-                formIdentifier = ${formIdentifier}
-                presetName = ${presetName}
-            }
-        }
-    }
-}
-
-prototype(Neos.Neos:Page) {
-    body.javascripts.ajaxForms = Neos.Fusion:Tag {
-        @position = '5100'
-        tagName = 'script'
-        attributes {
-            src = Neos.Fusion:ResourceUri {
-                path = 'resource://Onedrop.AjaxForm/Public/JavaScript/form.js'
-            }
-        }
-        @if.hasFormAndIsLiveAndActive = ${q(node).children('[instanceof Neos.Neos:ContentCollection]').find('[instanceof Onedrop.AjaxForm:Form]').is() && node.context.live && Configuration.setting('Onedrop.AjaxForm.includeJavascript')}
-    }
-}
+/**
+ * Root Fusion for the Onedrop.AjaxForm package
+ */
+include: ./**/*.fusion
