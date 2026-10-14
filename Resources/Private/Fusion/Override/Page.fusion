@@ -1,12 +1,15 @@
 prototype(Neos.Neos:Page) {
-    body.javascripts.ajaxForms = Neos.Fusion:Tag {
-        @position = '5100'
+    # Included in the head (deferred), as many sites replace the whole body of the page
+    head.javascripts.ajaxForms = Neos.Fusion:Tag {
+        @position = 'end'
         tagName = 'script'
         attributes {
             src = Neos.Fusion:ResourceUri {
                 path = 'resource://Onedrop.AjaxForm/Public/JavaScript/form.js'
             }
+            defer = true
         }
-        @if.hasFormAndIsLiveAndActive = ${q(node).children('[instanceof Neos.Neos:ContentCollection]').find('[instanceof Onedrop.AjaxForm:Form]').is() && node.context.live && Configuration.setting('Onedrop.AjaxForm.includeJavascript')}
+        @if.isActiveAndNotInBackend = ${Configuration.setting('Onedrop.AjaxForm.includeJavascript') && !renderingMode.isEdit}
+        @if.hasForm = ${q(node).children('[instanceof Neos.Neos:ContentCollection]').find('[instanceof Onedrop.AjaxForm:Form]').is()}
     }
 }
