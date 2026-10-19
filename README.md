@@ -19,6 +19,8 @@ the functionality.
 
 | Neos Version     | Onedrop.AjaxForm Version  |
 |------------------|---------------------------|
+| Neos 9.x         | 5.x                       |
+| Neos 7.x/8.x     | 4.x                       |
 | Neos 3.x/4.x/5.x | 3.x                       |
 | Neos 2.3 LTS     | 2.x                       |
 
@@ -45,10 +47,33 @@ element e.g.
 page = Page {  
   body.parts.newsletterForm = Onedrop.AjaxForm:Form {  
     formIdentifier = 'newsletter-form'  
-    presetName = 'bootstrap'  
+    formPresetName = 'bootstrap'  
   }  
 }
 ```
+
+`presetName` still works as a deprecated alias of `formPresetName`.
+
+### Override configuration:
+
+Like with `Neos.NodeTypes.Form:Form` you can adjust the form definition from Fusion with `overrideConfiguration`,
+e.g. to set the recipient of an email finisher:
+
+```neosfusion
+prototype(Onedrop.AjaxForm:Form) {
+    overrideConfiguration.finishers = Neos.Fusion:DataStructure {
+        0 = Neos.Fusion:DataStructure {
+            identifier = 'Neos.Form:Email'
+            options.recipientAddress = ${q(site).property('contactEmail')}
+        }
+    }
+}
+```
+
+As the ajax requests are not rendered by Fusion, the override configuration is stored on the server (cache
+`Onedrop_AjaxForm_OverrideConfiguration`, persistent) while the page is rendered, and only its identifier is
+passed to the ajax endpoint. The configuration is therefore never exposed to (or modifiable by) the client.
+If you run multiple web servers, make sure they share this cache (e.g. by configuring a Redis backend).
 
 ### Content element:
 
@@ -60,7 +85,7 @@ of the selected content element to 'Ajax Form'.
 ## JavaScript:
 
 The form submission is handled via vanilla javascript.  
-This package automatically appends the necessary script to the end of the body of every ``Neos.Neos:Page`` where 
+This package automatically adds the necessary script (deferred) to the head of every ``Neos.Neos:Page`` where 
 a form is placed.
 
 If you use Grunt, Gulp or any other build system, you probably don't want this extra script, 

@@ -1,23 +1,42 @@
 prototype(Onedrop.AjaxForm:Form) < prototype(Neos.NodeTypes.Form:Form) {
-    sectionName = 'Content'
-    templatePath = 'resource://Onedrop.AjaxForm/Private/Templates/NodeTypes/AjaxForm.html'
+    # Deprecated alias of "formPresetName", kept for backwards compatibility
+    presetName = null
+    formPresetName.@process.legacyPresetName = ${this.presetName ? this.presetName : value}
 
-    @context.formIdentifier = ${this.formIdentifier}
-    @context.locale = ${node.context.dimensions.language[0]}
-    @context.presetName = ${this.presetName}
+    # Passed to the ajax endpoint to render the form in the same language as the page
+    locale = ${node.dimensionSpacePoint.coordinates.language}
 
-    formWrapperAttributes = Neos.Fusion:Attributes {
-        data-ajax = 'ajax-form'
-        data-ajax-uri = Neos.Fusion:UriBuilder {
+    formWrapperAttributes = Neos.Fusion:DataStructure
+
+    @private {
+        overrideConfigurationIdentifier = ${Onedrop.AjaxForm.storeOverrideConfiguration(props.formIdentifier, props.overrideConfiguration)}
+        ajaxUri = Neos.Fusion:ActionUri {
             package = 'Onedrop.AjaxForm'
             controller = 'AjaxForm'
             action = 'index'
             format = 'html'
-            arguments {
-                locale = ${locale}
-                formIdentifier = ${formIdentifier}
-                presetName = ${presetName}
+            arguments = Neos.Fusion:DataStructure {
+                formIdentifier = ${props.formIdentifier}
+                presetName = ${props.formPresetName}
+                locale = ${props.locale}
+                locale.@if.isSet = ${props.locale}
+                overrideConfiguration = ${private.overrideConfigurationIdentifier}
+                overrideConfiguration.@if.isSet = ${private.overrideConfigurationIdentifier}
             }
         }
     }
+
+    renderer = afx`
+        <div {...props.attributes}>
+            <p @if.showEditHint={!props.formIdentifier && renderingMode.isEdit}>
+                {Translation.id('content.noValidFormIdentifier').package('Neos.NodeTypes.Form').source('NodeTypes/Form')}
+            </p>
+            <div @if.hasForm={props.formIdentifier} {...props.formWrapperAttributes} data-ajax="ajax-form" data-ajax-uri={private.ajaxUri}>
+                <Neos.Fusion:Template templatePath={props.templatePath}
+                                      formIdentifier={props.formIdentifier}
+                                      presetName={props.formPresetName}
+                                      overrideConfiguration={props.overrideConfiguration}/>
+            </div>
+        </div>
+    `
 }

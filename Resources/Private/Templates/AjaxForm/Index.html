@@ -10,10 +10,10 @@
 <f:section name="Content">
 	<f:if condition="{formIdentifier}">
         <f:then>
-            <form:render persistenceIdentifier="{formIdentifier}" presetName="{presetName}"/>
+            <form:render persistenceIdentifier="{formIdentifier}" presetName="{presetName}" overrideConfiguration="{overrideConfiguration}"/>
         </f:then>
         <f:else>
-            <p><f:translate id="content.noValidFormIdentifier" package="Neos.NodeTypes" source="NodeTypes/Form"/></p>
+            <p><f:translate id="content.noValidFormIdentifier" package="Neos.NodeTypes.Form" source="NodeTypes/Form"/></p>
         </f:else>
     </f:if>
 </f:section>

@@ -1,0 +1,7 @@
+# Stores the Fusion "overrideConfiguration" of rendered ajax forms, so that the ajax endpoint
+# can render the form with the same configuration as the page did.
+# It is persistent, because cached pages (or open browser tabs) still reference the stored entries.
+Onedrop_AjaxForm_OverrideConfiguration:
+  frontend: Neos\Cache\Frontend\VariableFrontend
+  backend: Neos\Cache\Backend\FileBackend
+  persistent: true
