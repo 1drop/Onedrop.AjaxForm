@@ -7,6 +7,9 @@ Neos:
     fusion:
       autoInclude:
         'Onedrop.AjaxForm': true
+  Fusion:
+    defaultContext:
+      'Onedrop.AjaxForm': 'Onedrop\AjaxForm\Eel\AjaxFormHelper'
   Flow:
     mvc:
       routes:

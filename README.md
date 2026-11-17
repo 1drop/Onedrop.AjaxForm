@@ -50,6 +50,27 @@ page = Page {
 }
 ```
 
+### Override configuration:
+
+Like with `Neos.NodeTypes.Form:Form` you can adjust the form definition from Fusion with `overrideConfiguration`,
+e.g. to set the recipient of an email finisher:
+
+```neosfusion
+prototype(Onedrop.AjaxForm:Form) {
+    overrideConfiguration.finishers = Neos.Fusion:DataStructure {
+        0 = Neos.Fusion:DataStructure {
+            identifier = 'Neos.Form:Email'
+            options.recipientAddress = ${q(site).property('contactEmail')}
+        }
+    }
+}
+```
+
+As the ajax requests are not rendered by Fusion, the override configuration is stored on the server (cache
+`Onedrop_AjaxForm_OverrideConfiguration`, persistent) while the page is rendered, and only its identifier is
+passed to the ajax endpoint. The configuration is therefore never exposed to (or modifiable by) the client.
+If you run multiple web servers, make sure they share this cache (e.g. by configuring a Redis backend).
+
 ### Content element:
 
 This package provides a content element 'Ajax Form' which you can use as replacement for the regular

@@ -1,0 +1,9 @@
+Onedrop\AjaxForm\Service\OverrideConfigurationStore:
+  properties:
+    cache:
+      object:
+        factoryObjectName: Neos\Flow\Cache\CacheManager
+        factoryMethodName: getCache
+        arguments:
+          1:
+            value: Onedrop_AjaxForm_OverrideConfiguration

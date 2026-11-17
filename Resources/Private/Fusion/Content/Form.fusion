@@ -5,6 +5,7 @@ prototype(Onedrop.AjaxForm:Form) < prototype(Neos.NodeTypes.Form:Form) {
     @context.formIdentifier = ${this.formIdentifier}
     @context.locale = ${node.context.dimensions.language[0]}
     @context.presetName = ${this.presetName}
+    @context.overrideConfigurationIdentifier = ${Onedrop.AjaxForm.storeOverrideConfiguration(this.formIdentifier, this.overrideConfiguration)}
 
     formWrapperAttributes = Neos.Fusion:Attributes {
         data-ajax = 'ajax-form'
@@ -17,6 +18,8 @@ prototype(Onedrop.AjaxForm:Form) < prototype(Neos.NodeTypes.Form:Form) {
                 locale = ${locale}
                 formIdentifier = ${formIdentifier}
                 presetName = ${presetName}
+                overrideConfiguration = ${overrideConfigurationIdentifier}
+                overrideConfiguration.@if.isSet = ${overrideConfigurationIdentifier}
             }
         }
     }
